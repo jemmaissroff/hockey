@@ -1,73 +1,96 @@
 require 'httparty'
 
-def make_pairs(on_ice, end_time, start_time, pairs)
-  duration = Time.strptime(end_time, "%M:%S") - Time.strptime(start_time, "%M:%S")
-  on_ice.combination(2).each do |pair|
-    pairs[pair.to_set] += duration
+def make_pairs(on_ice, end_time, start_time)
+  duration = (@time[end_time] - @time[start_time])/60
+  forwards = on_ice.reject do |player_id|
+    player = @players[player_id]
+    !player || player[:position_type] != "Forward"
   end
-  pairs
+
+  forwards.each do |player_id|
+    @players[player_id][:ice_time] += duration
+  end
+
+  forwards.combination(2).each do |pair|
+    @pairs[pair.to_set] += duration
+  end
 end
 
-def calc_on_ice(stats, pairs)
+@players = Hash.new  do |h, player_id|
+  response = HTTParty.get("https://statsapi.web.nhl.com/api/v1/people/#{player_id}")
+  player = response["people"].first
+  h[player_id] = {
+    name: player["fullName"],
+    position: player["primaryPosition"]["name"],
+    position_type: player["primaryPosition"]["type"],
+    team: player["currentTeam"] ?  player["currentTeam"]["id"] : 0,
+    ice_time: 0
+  }
+end
+@pairs = Hash.new { |h, k| h[k] = 0 }
+@time = Hash.new { |h, time| h[time] = Time.strptime(time, "%M:%S") }
+
+def calc_on_ice(stats)
   on_ice = []
   last_sub_time = "00:00"
-  stats.group_by{ |d| d["startTime"] }.sort.each do |k, subs|
-    pairs = make_pairs(on_ice.map { |p| p["playerId"] }, k, last_sub_time, pairs)
-    on_ice = on_ice.reject { |oi| oi["endTime"] == k }
+  stats.group_by{ |d| d["startTime"] }.sort.each do |time, subs|
+    make_pairs(on_ice.map { |p| p["playerId"] }, time, last_sub_time)
+    on_ice = on_ice.reject { |oi| oi["endTime"] == time }
     on_ice += subs
-    last_sub_time = k
+    last_sub_time = time
   end
-  pairs
+
+  make_pairs(on_ice.map { |p| p["playerId"] }, "20:00", last_sub_time)
 end
 
-response = HTTParty.get("https://statsapi.web.nhl.com/api/v1/schedule?teamId=06&startDate=2019-09-01&endDate=2020-03-30")
-pairs = Hash.new { |h, k| h[k] = 0 }
-game_ids = response["dates"].flat_map { |r| r["games"].map { |g| g["gamePk"] }}
-players = {}
+team_ids = HTTParty.get("https://statsapi.web.nhl.com/api/v1/teams")["teams"].
+  map { |team| team["id"] }
+
+game_ids = team_ids.map do |team_id|
+  response = HTTParty.get("https://statsapi.web.nhl.com/api/v1/schedule?teamId=#{team_id}&startDate=2019-09-01&endDate=2020-03-30")
+  response["dates"].flat_map { |r| r["games"].map { |g| g["gamePk"] }}
+end.flatten.uniq.sort
+
 
 game_ids.each do |game_id|
   sd = HTTParty.get("https://api.nhle.com/stats/rest/en/shiftcharts?cayenneExp=gameId=#{game_id}")["data"]
-  players = players.merge(sd.map { |d| [d['playerId'], "#{d['firstName']} #{d['lastName']}"] }.to_h)
-
   # EVG as eventDescription means a goal
-  bb_by_period = sd.select do |d|
-    d["teamName"] == "Boston Bruins" &&
-      !d["eventDescription"] &&
-      d["lastName"] != "Halak" &&
-      d["lastName"] != "Rask"
-  end.group_by { |d| d["period"] }.map do |period, stats|
-    pairs = calc_on_ice(stats, pairs)
+  sd.select { |d| !d["eventDescription"] }.
+    group_by { |d| d["teamName"] }.map do |_, team_stats|
+    team_stats.group_by { |d| d["period"] }.map do |period, stats|
+      calc_on_ice(stats)
+    end
   end
 
-  puts "Game data for #{game_id}: #{pairs.size}"
+  puts "Game data for #{game_id}: #{@pairs.size}"
 end
 
-pairs.keys.map(&:to_a).flatten.uniq.each do |player_id|
-  response = HTTParty.get("https://statsapi.web.nhl.com/api/v1/people/#{player_id}")
-  player = response["people"].first
-  players[player_id] = {
-    name: player["fullName"],
-    position: player["primaryPosition"]["name"],
-    position_type: player["primaryPosition"]["type"]
-  }
-end
-
-pairs = pairs.reject do |pair, _|
-  pair.map { |pid| players[pid] }.select do |player|
-    !player || player[:position_type] != "Forward"
-  end.any?
-end
-
-File.write("pos-on-ice-data.csv",
-           pairs.sort_by { |_, duration| duration }.
-           reject { |_, duration| duration < 8000 }.map do |pair, duration|
-             [pair.map do |player_id|
-               [
-                 players[player_id][:name],
-                 players[player_id][:position],
-                 players[player_id][:position_type],
-               ]
-             end, (duration / 60).round].
-               flatten
-           end.map(&:to_csv).join
+File.write("all-pos-on-ice-data.csv",
+           ([%w[
+           p1name
+           p1pos
+           p1type
+           p1team
+           p1icetime
+           p2name
+           p2pos
+           p2type
+           p2team
+           p2icetime
+           time
+            ]] +
+            @pairs.sort_by { |_, duration| duration }.
+            reject { |_, duration| duration < 120 }.map do |pair, duration|
+              [pair.map do |player_id|
+                player = @players[player_id]
+                [
+                  player[:name],
+                  player[:position],
+                  player[:position_type],
+                  player[:team],
+                  player[:ice_time].round,
+                ]
+              end, duration.round].
+              flatten
+            end).map(&:to_csv).join
           )
