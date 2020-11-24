@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
+  "name": "hockey-visualization",
   "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "A Node.js app using Neo4j to visualize hockey data",
   "engines": {
     "node": "12.x"
   },
@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "ejs": "^2.5.6",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "neo4j-driver": "^4.2.1"
   },
   "devDependencies": {
     "got": "^11.3.0",
@@ -25,7 +26,9 @@
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "hockey",
+    "neo4j",
+    "graphene"
   ],
   "license": "MIT"
 }
