@@ -1,0 +1,14 @@
+version: '2'
+services:
+  neo4j:
+    build:
+      context: .
+      dockerfile: Dockerfile.yml
+    image: 'neo4j:latest'
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+volumes:
+  neo4j_data:
+    driver: local
