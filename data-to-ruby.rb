@@ -7,11 +7,20 @@ def make_pairs(on_ice, end_time, start_time)
     !player || player[:position_type] != "Forward"
   end
 
-  forwards.each do |player_id|
+  defenseman = on_ice.reject do |player_id|
+    player = @players[player_id]
+    !player || player[:position_type] != "Defenseman"
+  end
+
+  (forwards + defenseman).each do |player_id|
     @players[player_id][:ice_time] += duration
   end
 
   forwards.combination(2).each do |pair|
+    @pairs[pair.to_set] += duration
+  end
+
+  defenseman.combination(2).each do |pair|
     @pairs[pair.to_set] += duration
   end
 end
@@ -24,6 +33,7 @@ end
     position: player["primaryPosition"]["name"],
     position_type: player["primaryPosition"]["type"],
     team: player["currentTeam"] ?  player["currentTeam"]["id"] : 0,
+    team_name: player["currentTeam"] ?  player["currentTeam"]["name"] : "No team",
     ice_time: 0
   }
 end
@@ -65,17 +75,19 @@ game_ids.each do |game_id|
   puts "Game data for #{game_id}: #{@pairs.size}"
 end
 
-File.write("all-pos-on-ice-data.csv",
+File.write("import/all-pos-on-ice-data.csv",
            ([%w[
            p1name
            p1pos
            p1type
            p1team
+           p1teamname
            p1icetime
            p2name
            p2pos
            p2type
            p2team
+           p2teamname
            p2icetime
            time
             ]] +
@@ -88,6 +100,7 @@ File.write("all-pos-on-ice-data.csv",
                   player[:position],
                   player[:position_type],
                   player[:team],
+                  player[:team_name],
                   player[:ice_time].round,
                 ]
               end, duration.round].

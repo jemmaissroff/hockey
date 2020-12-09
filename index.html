@@ -27,14 +27,15 @@
         function draw() {
             var config = {
                 container_id: "viz",
-                server_url: "bolt://localhost:7687",
+                server_url: "bolt://104.248.238.15:7687",
                 labels: {
                     "Player": {
                         "caption": "name",
 			"size": "iceTime",
-                        "community": "team",
+                        "community": "teamInt",
                         "title_properties": [
                             "name",
+			    "team",
 			    "position",
 			    "iceTime"
                         ]
