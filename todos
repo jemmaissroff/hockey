@@ -1,5 +1,0 @@
-- Make scripts/cypher.cql run on startup of docker container
-This will appropriately load the data instead of manually running via:
-cat scripts/cypher.cql | cypher-shell -u neo4j -p test
-
-- Figure out username / pwd / auth stuff
