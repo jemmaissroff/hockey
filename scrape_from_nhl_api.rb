@@ -96,7 +96,7 @@ File.write("import/bs-10-15.csv",
                   player[:team_name],
                   player[:ice_time].round(2)
                 ]
-              end, duration.round].
+              end, duration.round(2)].
               flatten
             end).map(&:to_csv).join
           )
