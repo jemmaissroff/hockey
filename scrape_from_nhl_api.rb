@@ -1,7 +1,7 @@
 require 'httparty'
 
 def make_pairs(on_ice, end_time, start_time)
-  duration = (@time[end_time] - @time[start_time])/60
+  duration = (@time[end_time] - @time[start_time])/60.0
   forwards = on_ice.reject do |player_id|
     player = @players[player_id]
     !player || player[:position_type] != "Forward" || player[:team] != 6
@@ -62,7 +62,7 @@ game_ids.each do |game_id|
   sd.select { |d| !d["eventDescription"] }.
     group_by { |d| d["teamName"] }.map do |_, team_stats|
     team_stats.group_by { |d| d["period"] }.map do |period, stats|
-      calc_on_ice(stats)
+      calc_on_ice(stats) if period < 4
     end
   end
 
@@ -94,7 +94,7 @@ File.write("import/bs-10-15.csv",
                   player[:position_type],
                   player[:team],
                   player[:team_name],
-                  player[:ice_time].round,
+                  player[:ice_time].round(2)
                 ]
               end, duration.round].
               flatten
