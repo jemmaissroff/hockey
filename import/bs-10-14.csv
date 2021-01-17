@@ -1,0 +1,58 @@
+p1name,p1pos,p1type,p1team,p1teamname,p1icetime,p2name,p2pos,p2type,p2team,p2teamname,p2icetime,time
+Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,0.03
+Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,0.08
+Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,0.08
+Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,0.15
+Ondrej Kase,Right Wing,Forward,6,Boston Bruins,13.63,Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,0.18
+Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,0.32
+Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,Ondrej Kase,Right Wing,Forward,6,Boston Bruins,13.63,0.32
+Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,Ondrej Kase,Right Wing,Forward,6,Boston Bruins,13.63,0.35
+Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,0.35
+David Krejci,Center,Forward,6,Boston Bruins,19.17,Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,0.4
+Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,0.42
+Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,Trent Frederic,Center,Forward,6,Boston Bruins,10.73,0.5
+Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,0.53
+Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,David Krejci,Center,Forward,6,Boston Bruins,19.17,0.55
+Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,Trent Frederic,Center,Forward,6,Boston Bruins,10.73,0.55
+Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,0.57
+Trent Frederic,Center,Forward,6,Boston Bruins,10.73,Ondrej Kase,Right Wing,Forward,6,Boston Bruins,13.63,0.57
+Trent Frederic,Center,Forward,6,Boston Bruins,10.73,David Krejci,Center,Forward,6,Boston Bruins,19.17,0.58
+Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,David Krejci,Center,Forward,6,Boston Bruins,19.17,0.6
+Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,0.6
+Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,0.65
+Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,0.65
+Trent Frederic,Center,Forward,6,Boston Bruins,10.73,Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,0.67
+Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,0.78
+Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,0.9
+Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,0.97
+Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,Ondrej Kase,Right Wing,Forward,6,Boston Bruins,13.63,0.97
+Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,0.97
+Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,0.98
+Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,1.03
+David Krejci,Center,Forward,6,Boston Bruins,19.17,Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,1.05
+Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,Trent Frederic,Center,Forward,6,Boston Bruins,10.73,1.1
+Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,Ondrej Kase,Right Wing,Forward,6,Boston Bruins,13.63,1.1
+Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,1.25
+Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,1.38
+Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,1.45
+Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,1.53
+Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,1.68
+Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,Trent Frederic,Center,Forward,6,Boston Bruins,10.73,2.28
+Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,2.92
+David Krejci,Center,Forward,6,Boston Bruins,19.17,Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,4.6
+Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,4.93
+Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,David Krejci,Center,Forward,6,Boston Bruins,19.17,5.25
+Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,5.38
+Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,David Krejci,Center,Forward,6,Boston Bruins,19.17,6.57
+Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,Trent Frederic,Center,Forward,6,Boston Bruins,10.73,6.65
+Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,Chris Wagner,Right Wing,Forward,6,Boston Bruins,10.7,7.08
+Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,7.57
+Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,7.67
+Nick Ritchie,Left Wing,Forward,6,Boston Bruins,11.27,Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,8.53
+Sean Kuraly,Center,Forward,6,Boston Bruins,12.68,Trent Frederic,Center,Forward,6,Boston Bruins,10.73,8.55
+Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,Jack Studnicka,Center,Forward,6,Boston Bruins,11.67,8.72
+Charlie Coyle,Center,Forward,6,Boston Bruins,18.38,Anders Bjork,Left Wing,Forward,6,Boston Bruins,13.93,9.48
+Ondrej Kase,Right Wing,Forward,6,Boston Bruins,13.63,Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,11.97
+David Krejci,Center,Forward,6,Boston Bruins,19.17,Jake DeBrusk,Left Wing,Forward,6,Boston Bruins,15.12,12.02
+David Krejci,Center,Forward,6,Boston Bruins,19.17,Ondrej Kase,Right Wing,Forward,6,Boston Bruins,13.63,12.17
+Patrice Bergeron,Center,Forward,6,Boston Bruins,17.67,Brad Marchand,Left Wing,Forward,6,Boston Bruins,20.17,17.05
