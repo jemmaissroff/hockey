@@ -4,23 +4,14 @@ def make_pairs(on_ice, end_time, start_time)
   duration = (@time[end_time] - @time[start_time])/60
   forwards = on_ice.reject do |player_id|
     player = @players[player_id]
-    !player || player[:position_type] != "Forward"
+    !player || player[:position_type] != "Forward" || player[:team] != 6
   end
 
-  defenseman = on_ice.reject do |player_id|
-    player = @players[player_id]
-    !player || player[:position_type] != "Defenseman"
-  end
-
-  (forwards + defenseman).each do |player_id|
+  forwards.each do |player_id|
     @players[player_id][:ice_time] += duration
   end
 
   forwards.combination(2).each do |pair|
-    @pairs[pair.to_set] += duration
-  end
-
-  defenseman.combination(2).each do |pair|
     @pairs[pair.to_set] += duration
   end
 end
@@ -53,6 +44,7 @@ def calc_on_ice(stats)
   make_pairs(on_ice.map { |p| p["playerId"] }, "20:00", last_sub_time)
 end
 
+=begin
 team_ids = HTTParty.get("https://statsapi.web.nhl.com/api/v1/teams")["teams"].
   map { |team| team["id"] }
 
@@ -60,7 +52,9 @@ game_ids = team_ids.map do |team_id|
   response = HTTParty.get("https://statsapi.web.nhl.com/api/v1/schedule?teamId=#{team_id}&startDate=2019-09-01&endDate=2020-03-30")
   response["dates"].flat_map { |r| r["games"].map { |g| g["gamePk"] }}
 end.flatten.uniq.sort
+=end
 
+game_ids = [2020020023]
 
 game_ids.each do |game_id|
   sd = HTTParty.get("https://api.nhle.com/stats/rest/en/shiftcharts?cayenneExp=gameId=#{game_id}")["data"]
@@ -75,7 +69,7 @@ game_ids.each do |game_id|
   puts "Game data for #{game_id}: #{@pairs.size}"
 end
 
-File.write("import/all-pos-on-ice-data.csv",
+File.write("import/bs-10-15.csv",
            ([%w[
            p1name
            p1pos
@@ -91,8 +85,7 @@ File.write("import/all-pos-on-ice-data.csv",
            p2icetime
            time
             ]] +
-            @pairs.sort_by { |_, duration| duration }.
-            reject { |_, duration| duration < 120 }.map do |pair, duration|
+            @pairs.sort_by { |_, duration| duration }.map do |pair, duration|
               [pair.map do |player_id|
                 player = @players[player_id]
                 [
