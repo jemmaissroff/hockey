@@ -53,14 +53,7 @@ def calc_on_ice(stats)
   make_pairs(on_ice.map { |p| p["playerId"] }, "20:00", last_sub_time)
 end
 
-team_ids = HTTParty.get("https://statsapi.web.nhl.com/api/v1/teams")["teams"].
-  map { |team| team["id"] }
-
-game_ids = team_ids.map do |team_id|
-  response = HTTParty.get("https://statsapi.web.nhl.com/api/v1/schedule?teamId=#{team_id}&startDate=2019-09-01&endDate=2020-03-30")
-  response["dates"].flat_map { |r| r["games"].map { |g| g["gamePk"] }}
-end.flatten.uniq.sort
-
+game_ids = HTTParty.get("https://statsapi.web.nhl.com/api/v1/schedule?season=20202021")["dates"].flat_map { |r| r["games"].map { |g| g["gamePk"] }}.uniq.sort
 
 game_ids.each do |game_id|
   sd = HTTParty.get("https://api.nhle.com/stats/rest/en/shiftcharts?cayenneExp=gameId=#{game_id}")["data"]
@@ -75,7 +68,10 @@ game_ids.each do |game_id|
   puts "Game data for #{game_id}: #{@pairs.size}"
 end
 
-File.write("import/all-pos-on-ice-data.csv",
+# writeable = @pairs.reject { _1[0].size == 1 }.map { _1[0].to_a << _1[1] }.map(&:to_csv).join
+# File.write("import/pairs.csv", writeable)
+
+File.write("import/all-pos-on-ice-data-2021.csv",
            ([%w[
            p1name
            p1pos
@@ -92,7 +88,8 @@ File.write("import/all-pos-on-ice-data.csv",
            time
             ]] +
             @pairs.sort_by { |_, duration| duration }.
-            reject { |_, duration| duration < 120 }.map do |pair, duration|
+            reject { |pair, duration| duration < 120 || pair.size < 2 }.
+            map do |pair, duration|
               [pair.map do |player_id|
                 player = @players[player_id]
                 [
