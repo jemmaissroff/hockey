@@ -42,7 +42,7 @@ There are many potential avenues to explore this more deeply. In no particular o
 
 [neo4j]: https://neo4j.com/
 [neovis]: https://github.com/neo4j-contrib/neovis.js/
-[blog-vis]: https://jemma.dev/blog/nhl-time-on-ice
+[blog-vis]: https://jemma.dev/blog/nhl-time-on-ice-21
 [teams-page]: https://statsapi.web.nhl.com/api/v1/teams
 [schedule]: https://statsapi.web.nhl.com/api/v1/schedule?teamId=6&startDate=2019-09-01&endDate=2020-03-30
 [shifts]: https://api.nhle.com/stats/rest/en/shiftcharts?cayenneExp=gameId=2019020351
